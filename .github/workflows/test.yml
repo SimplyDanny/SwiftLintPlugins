@@ -1,0 +1,45 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  XCODE_VERSION: '15.0'
+
+defaults:
+  run:
+    shell: sh
+    working-directory: ./SwiftLintPluginsTest
+
+jobs:
+  plugin:
+    name: Test Plugin
+    runs-on: macos-13
+    steps:
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ env.XCODE_VERSION }}
+      - name: Checkout SwiftLintPlugins
+        uses: actions/checkout@v4
+        with:
+          path: SwiftLintPlugins
+      - name: Create project directory
+        run: mkdir SwiftLintPluginsTest
+        working-directory: .
+      - name: Configure project
+        run: |
+          swift package init --type executable
+          cp ../SwiftLintPlugins/.github/workflows/Package.swift .
+          echo "let myVar = 0 as! Int" > Sources/main.swift
+          echo "included: [Sources]" > .swiftlint.yml
+      - name: Build project and check findings
+        run: swift build 2>&1 | grep -q "Force Cast Violation"
+      - name: Verify command plugin
+        run: |
+          swift package swiftlint --version
+          swift package swiftlint --help
+          swift package swiftlint 2>&1 | grep -q "Force Cast Violation"
