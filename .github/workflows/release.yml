@@ -1,0 +1,21 @@
+name: Release
+
+on:
+  repository_dispatch:
+    types: [swiftlint-release]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ncipollo/release-action@v1
+        with:
+          name: ${{ github.event.client_payload.title }}
+          tag: ${{ github.event.client_payload.tag }}
+          body: >
+            Check out the changes made in the
+            [SwiftLint release](https://github.com/realm/SwiftLint/releases/tag/${{ github.event.client_payload.tag }})
+            associated with this version.
