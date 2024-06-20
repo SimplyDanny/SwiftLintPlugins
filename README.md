@@ -10,7 +10,7 @@ refer to the main repository, especially [Installation](https://github.com/realm
 > developed there next to SwiftLint as a command-line tool itself. The plugin source code is kept in sync with SwiftLint
 > and so are the releases. Please report issues and propose changes to the plugins in the main source repository.
 
-Offering the plugins in a separate package has multiple advantages:
+Offering the plugins in a separate package has multiple advantages you should be aware of:
 
 * No need to clone the whole SwiftLint repository.
 * SwiftLint itself is included as a binary dependency, thus the consumer doesn't need to build it first.
@@ -19,3 +19,9 @@ Offering the plugins in a separate package has multiple advantages:
   a lot of build time alone.
 * For projects having adopted Swift macros or depend on SwiftSyntax for other reasons, there is no version conflict
   caused by the fact that SwiftLint has to rely on a fixed and pretty current version.
+* As this Swift package doesn't provide any build products, there is no way to add them as dependencies to iOS,
+  watchOS, ... targets. They would fail to build if you were to do that.
+
+That said, you are perfectly free to consume the plugins directly from the
+[SwiftLint](https://github.com/realm/swiftlint) repository instead if you like to. Both ways are functionally
+equivalent, however one comes with the aforementioned drawbacks.
