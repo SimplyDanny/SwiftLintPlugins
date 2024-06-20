@@ -1,7 +1,9 @@
 # SwiftLint Plugins
 
 This repository provides the Swift Package Manager plugins (and only the plugins) that are developed as a part of
-[SwiftLint](https://github.com/realm/swiftlint).
+[SwiftLint](https://github.com/realm/swiftlint). For comprehensive advice on how to integrate them into your projects
+refer to the main repository, especially [Installation](https://github.com/realm/SwiftLint#installation) and
+[Setup](https://github.com/realm/SwiftLint#setup).
 
 > [!NOTE]
 > This is only an excerpt of the official [SwiftLint](https://github.com/realm/swiftlint) project. The plugins will be
