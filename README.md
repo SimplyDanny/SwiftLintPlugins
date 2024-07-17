@@ -24,4 +24,4 @@ Offering the plugins in a separate package has multiple advantages you should be
 
 That said, you are perfectly free to consume the plugins directly from the
 [SwiftLint](https://github.com/realm/swiftlint) repository instead if you like to. Both ways are functionally
-equivalent, however one comes with the aforementioned drawbacks.
+equivalent, however one comes with the aforementioned conveniences.
