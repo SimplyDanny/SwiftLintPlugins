@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Update binary package
         run: >
-          sed -i ''
+          sed -i
           -e "s#/[0-9]\{1,\}\.[0-9]\{1,\}\.[0-9]\{1,\}/#/${{ github.event.client_payload.tag }}/#"
           -e "s/[a-fA-F0-9]\{64\}/${{ github.event.client_payload.checksum }}/"
           Package.swift
