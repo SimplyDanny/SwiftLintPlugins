@@ -15,7 +15,7 @@ defaults:
 
 jobs:
   plugin:
-    name: Test Plugin
+    name: Test Plugins
     runs-on: macos-13
     steps:
       - name: Select Xcode
@@ -37,8 +37,39 @@ jobs:
           echo "included: [Sources]" > .swiftlint.yml
       - name: Build project and check findings
         run: swift build 2>&1 | grep -q "Force Cast Violation"
+      - name: Let build fail
+        id: failed_build
+        run: swift build
+        continue-on-error: true
+      - name: Check that build failed
+        if: ${{ steps.failed_build.outcome != 'failure' }}
+        run: exit 1
       - name: Verify command plugin
         run: |
           swift package swiftlint --version
           swift package swiftlint --help
           swift package swiftlint 2>&1 | grep -q "Force Cast Violation"
+      - name: Let command fail
+        id: failed_command
+        run: swift package swiftlint
+        continue-on-error: true
+      - name: Check that command failed
+        if: ${{ steps.failed_command.outcome != 'failure' }}
+        run: exit 1
+      - name: Verify Xcode plugin
+        run: xcodebuild -scheme SwiftLintPluginsTest -destination 'platform=macOS' build 2>&1 | grep -q "Force Cast Violation"
+      - name: Let Xcode build fail
+        id: failed_xcode_build
+        run: xcodebuild -scheme SwiftLintPluginsTest -destination 'platform=macOS' build
+        continue-on-error: true
+      - name: Check that Xcode build failed
+        if: ${{ steps.failed_xcode_build.outcome != 'failure' }}
+        run: exit 1
+      - name: Change to warning
+        run: |
+          echo "force_cast: warning" > .swiftlint.yml
+      - name: Check that all commands pass
+        run: |
+          swift build
+          swift package swiftlint
+          xcodebuild -scheme SwiftLintPluginsTest -destination 'platform=macOS' build
