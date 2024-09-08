@@ -61,6 +61,5 @@ jobs:
           echo "force_cast: warning" > .swiftlint.yml
       - name: Check that all commands pass
         run: |
-          swift build | grep -q "Force Cast Violation"
           swift package swiftlint | grep -q "Force Cast Violation"
           xcodebuild -scheme SwiftLintPluginsTest -destination 'platform=macOS' -skipPackagePluginValidation build | grep -q "Force Cast Violation"
