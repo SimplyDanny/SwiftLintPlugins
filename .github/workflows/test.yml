@@ -39,21 +39,21 @@ jobs:
         id: failed_build
         run: swift build
         continue-on-error: true
-      - name: Check that build failed
+      - name: Verify that build failed
         if: ${{ steps.failed_build.outcome != 'failure' }}
         run: exit 1
       - name: Let command fail
         id: failed_command
         run: swift package swiftlint
         continue-on-error: true
-      - name: Check that command failed
+      - name: Verify that command failed
         if: ${{ steps.failed_command.outcome != 'failure' }}
         run: exit 1
       - name: Let Xcode build fail
         id: failed_xcode_build
-        run: xcodebuild -scheme SwiftLintPluginsTest -destination 'platform=macOS' build
+        run: xcodebuild -scheme SwiftLintPluginsTest -destination 'platform=macOS' -skipPackagePluginValidation build
         continue-on-error: true
-      - name: Check that Xcode build failed
+      - name: Verify that Xcode build failed
         if: ${{ steps.failed_xcode_build.outcome != 'failure' }}
         run: exit 1
       - name: Change to warning
@@ -63,4 +63,4 @@ jobs:
         run: |
           swift build | grep -q "Force Cast Violation"
           swift package swiftlint | grep -q "Force Cast Violation"
-          xcodebuild -scheme SwiftLintPluginsTest -destination 'platform=macOS' build | grep -q "Force Cast Violation"
+          xcodebuild -scheme SwiftLintPluginsTest -destination 'platform=macOS' -skipPackagePluginValidation build | grep -q "Force Cast Violation"
