@@ -44,7 +44,7 @@ jobs:
         run: exit 1
       - name: Let command fail
         id: failed_command
-        run: swift package swiftlint
+        run: swift package plugin --allow-writing-to-package-directory swiftlint
         continue-on-error: true
       - name: Verify that command failed
         if: ${{ steps.failed_command.outcome != 'failure' }}
@@ -61,5 +61,5 @@ jobs:
           echo "force_cast: warning" > .swiftlint.yml
       - name: Check that all commands pass
         run: |
-          swift package swiftlint | grep -q "Force Cast Violation"
+          swift package plugin --allow-writing-to-package-directory swiftlint | grep -q "Force Cast Violation"
           xcodebuild -scheme SwiftLintPluginsTest -destination 'platform=macOS' -skipPackagePluginValidation build | grep -q "Force Cast Violation"
