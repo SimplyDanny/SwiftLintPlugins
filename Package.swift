@@ -15,12 +15,21 @@ let package = Package(
         .plugin(
             name: "SwiftLintBuildToolPlugin",
             capability: .buildTool(),
-            dependencies: [.target(name: "SwiftLintBinary")]
+            dependencies: [.target(name: "SwiftLintBinary")],
+            packageAccess: false
         ),
         .plugin(
             name: "SwiftLintCommandPlugin",
-            capability: .command(intent: .custom(verb: "swiftlint", description: "SwiftLint Command Plugin")),
-            dependencies: [.target(name: "SwiftLintBinary")]
+            capability: .command(
+                intent: .custom(verb: "swiftlint", description: "SwiftLint Command Plugin"),
+                permissions: [
+                    .writeToPackageDirectory(
+                        reason: "When this command is run with the `--fix` option it may modify source files."
+                    ),
+                ]
+            ),
+            dependencies: [.target(name: "SwiftLintBinary")],
+            packageAccess: false
         ),
         .binaryTarget(
             name: "SwiftLintBinary",
