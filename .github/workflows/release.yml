@@ -20,7 +20,7 @@ jobs:
           Package.swift
       - name: Configure author
         run: |
-          git config --global user.name SimplyDanny
+          git config --global user.name ${{ github.repository_owner }}
           git config --global user.email null
       - name: Commit
         run: |
