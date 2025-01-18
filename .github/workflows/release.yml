@@ -18,10 +18,15 @@ jobs:
           -e "s#/[0-9]\{1,\}\.[0-9]\{1,\}\.[0-9]\{1,\}/#/${{ github.event.client_payload.tag }}/#"
           -e "s/[a-fA-F0-9]\{64\}/${{ github.event.client_payload.checksum }}/"
           Package.swift
+      - name: Configure Git author
+        id: configure_git_author
+        uses: Homebrew/actions/git-user-config@master
+        with:
+          username: ${{ github.repository_owner }}
       - name: Configure author
         run: |
-          git config --global user.name ${{ github.repository_owner }}
-          git config --global user.email null
+          git config --local user.name "${{ steps.configure_git_author.outputs.name }}"
+          git config --local user.email "${{ steps.configure_git_author.outputs.email }}"
       - name: Commit
         run: |
           git add Package.swift
