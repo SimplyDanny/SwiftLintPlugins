@@ -38,4 +38,4 @@ jobs:
             Check out the changes made in the
             [SwiftLint release](https://github.com/realm/SwiftLint/releases/tag/${{ github.event.client_payload.tag }})
             associated with this version.
-          draft: true
+          draft: false
