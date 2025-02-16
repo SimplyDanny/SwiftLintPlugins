@@ -1,5 +1,8 @@
 # SwiftLint Plugins
 
+[![Supported Swift versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FSimplyDanny%2FSwiftLintPlugins%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/SimplyDanny/SwiftLintPlugins)
+[![Supported platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FSimplyDanny%2FSwiftLintPlugins%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/SimplyDanny/SwiftLintPlugins)
+
 This repository provides the Swift Package Manager plugins (and only the plugins) that are developed as a part of
 [SwiftLint](https://github.com/realm/swiftlint). For comprehensive advice on how to integrate them into your projects
 refer to the main repository, especially [Installation](https://github.com/realm/SwiftLint#installation) and

@@ -1,0 +1,5 @@
+version: 1
+metadata:
+  authors: Danny Mösch
+external_links:
+  documentation: "https://realm.github.io/SwiftLint"
