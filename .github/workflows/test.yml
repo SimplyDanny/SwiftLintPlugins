@@ -17,10 +17,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-13
-            display_name: "macOS 13"
           - os: macos-14
             display_name: "macOS 14"
+          - os: macos-15
+            display_name: "macOS 15"
           - os: ubuntu-24.04
             display_name: "Ubuntu 24.04"
           - os: ubuntu-24.04-arm
@@ -61,8 +61,17 @@ jobs:
           swift package plugin --allow-writing-to-package-directory swiftlint | grep -q "Force Cast Violation"
 
   xcode:
-    name: Xcode 15.0, macOS 13
-    runs-on: macos-13
+    name: Xcode ${{ matrix.xcode_version }}, ${{ matrix.display_name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: macos-14
+            display_name: "macOS 14"
+            xcode_version: "15.4"
+          - os: macos-15
+            display_name: "macOS 15"
+            xcode_version: "16.4"
     steps:
       - name: Checkout SwiftLintPlugins
         uses: actions/checkout@v4
