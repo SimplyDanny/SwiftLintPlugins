@@ -6,9 +6,6 @@ on:
       - main
   pull_request:
 
-env:
-  XCODE_VERSION: '15.0'
-
 defaults:
   run:
     working-directory: ./SwiftLintPluginsTest
@@ -67,10 +64,6 @@ jobs:
     name: Xcode 15.0, macOS 13
     runs-on: macos-13
     steps:
-      - name: Select Xcode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: ${{ env.XCODE_VERSION }}
       - name: Checkout SwiftLintPlugins
         uses: actions/checkout@v4
         with:
