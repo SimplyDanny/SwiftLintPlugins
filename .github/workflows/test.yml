@@ -21,6 +21,8 @@ jobs:
             display_name: "macOS 14"
           - os: macos-15
             display_name: "macOS 15"
+          - os: macos-26
+            display_name: "macOS 26"
           - os: ubuntu-24.04
             display_name: "Ubuntu 24.04"
           - os: ubuntu-24.04-arm
@@ -72,6 +74,9 @@ jobs:
           - os: macos-15
             display_name: "macOS 15"
             xcode_version: "16.4"
+          - os: macos-26
+            display_name: "macOS 26"
+            xcode_version: "26.0"
     steps:
       - name: Checkout SwiftLintPlugins
         uses: actions/checkout@v4
