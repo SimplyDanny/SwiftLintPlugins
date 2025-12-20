@@ -44,3 +44,4 @@ jobs:
             [SwiftLint release](https://github.com/realm/SwiftLint/releases/tag/${{ github.event.client_payload.tag }})
             associated with this version.
           draft: false
+          prerelease: ${{ github.event.client_payload.prerelease }}
