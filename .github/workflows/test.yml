@@ -65,6 +65,9 @@ jobs:
           swift package plugin --allow-writing-to-package-directory swiftlint | grep -q "Force Cast Violation"
       - name: Verify that SwiftLintBinary executable is available
         run: swift package show-executables | grep -q SwiftLintBinary
+      - name: Verify that SwiftLintBinary executes and all commands pass
+        run: |
+          ./.build/artifacts/swiftlintplugins/SwiftLintBinary/SwiftLintBinary.artifactbundle/macos/swiftlint | grep -q "Force Cast Violation"
 
   xcode:
     name: Xcode ${{ matrix.xcode_version }}, ${{ matrix.display_name }}
