@@ -8,6 +8,7 @@ let package = Package(
         .macOS(.v12)
     ],
     products: [
+        .executable(name: "SwiftLintBinary", targets: ["SwiftLintBinary"]),
         .plugin(name: "SwiftLintBuildToolPlugin", targets: ["SwiftLintBuildToolPlugin"]),
         .plugin(name: "SwiftLintCommandPlugin", targets: ["SwiftLintCommandPlugin"])
     ],
