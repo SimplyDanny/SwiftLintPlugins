@@ -63,21 +63,18 @@ jobs:
       - name: Check that all commands pass
         run: |
           swift package plugin --allow-writing-to-package-directory swiftlint | grep -q "Force Cast Violation"
-      - name: Verify that SwiftLintBinary executable is available (MacOS 14 only)
-        if: ${{ matrix.os == 'macos-14' }}
-        run: swift package dump-package | grep -q SwiftLintBinary
-      - name: Verify that SwiftLintBinary executable is available (non-MacOS 14)
+      - name: Verify that SwiftLintBinary executable is available (MacOS 15+)
         if: ${{ matrix.os != 'macos-14' }}
         run: swift package show-executables | grep -q SwiftLintBinary
-      - name: Verify that SwiftLintBinary executes and all commands pass (macOS)
+      - name: Verify that SwiftLintBinary executes (macOS)
         if: ${{ startsWith(matrix.os, 'macos-') }}
         run: |
           ./.build/artifacts/swiftlintplugins/SwiftLintBinary/SwiftLintBinary.artifactbundle/macos/swiftlint | grep -q "Force Cast Violation"
-      - name: Verify that SwiftLintBinary executes and all commands pass (Ubuntu amd64)
+      - name: Verify that SwiftLintBinary executes (Ubuntu amd64)
         if: ${{ matrix.os == 'ubuntu-24.04' }}
         run: |
           ./.build/artifacts/swiftlintplugins/SwiftLintBinary/SwiftLintBinary.artifactbundle/linux/amd64/swiftlint | grep -q "Force Cast Violation"
-      - name: Verify that SwiftLintBinary executes and all commands pass (Ubuntu arm64)
+      - name: Verify that SwiftLintBinary executes (Ubuntu arm64)
         if: ${{ matrix.os == 'ubuntu-24.04-arm' }}
         run: |
           ./.build/artifacts/swiftlintplugins/SwiftLintBinary/SwiftLintBinary.artifactbundle/linux/arm64/swiftlint | grep -q "Force Cast Violation"
